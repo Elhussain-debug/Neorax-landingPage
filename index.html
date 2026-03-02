@@ -8,27 +8,30 @@
     <meta name="author" content="Neorax Technology Limited">
     <title>Neorax Technology | Your One-Stop IT Solution Provider</title>
 
-    <!-- Google Fonts - Roboto -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Custom Colors Configuration -->
+    <!-- Custom Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#000080',
-                        secondary: '#ADD8E6',
-                        primaryDark: '#000066',
-                        secondaryDark: '#7FC0DC',
+                        primary: '#1e40af',
+                        secondary: '#10b981',
+                        accent: '#f97316',
+                        dark: '#0f172a',
+                        light: '#f8fafc',
                     },
                     fontFamily: {
-                        sans: ['Roboto', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
                     }
                 }
             }
@@ -37,127 +40,147 @@
 
     <style>
         html { scroll-behavior: smooth; }
-        .hero-gradient { background: linear-gradient(135deg, #000080 0%, #000066 100%); }
-        .section-gradient { background: linear-gradient(180deg, #ffffff 0%, #f0f8ff 100%); }
-        .btn-primary { background-color: #000080; transition: all 0.3s ease; }
-        .btn-primary:hover { background-color: #000066; transform: translateY(-2px); }
-        .btn-secondary { background-color: #ADD8E6; color: #000080; transition: all 0.3s ease; }
-        .btn-secondary:hover { background-color: #7FC0DC; transform: translateY(-2px); }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,128,0.15); }
+
+        /* Subtle dot pattern */
+        .dots {
+            background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+
+        /* Minimal card */
+        .card-minimal {
+            transition: all 0.3s ease;
+        }
+        .card-minimal:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Smooth animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Button hover */
+        .btn-hover {
+            transition: all 0.2s ease;
+        }
+        .btn-hover:hover {
+            transform: translateY(-1px);
+        }
+        .btn-hover:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="font-sans text-gray-800 antialiased">
+<body class="font-sans text-slate-600 antialiased bg-white">
 
     <!-- Navigation -->
-    <nav class="fixed w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-6xl mx-auto px-6">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <a href="#" class="text-2xl font-bold text-primary">
-                        Neorax<span class="text-secondary">.</span>
-                    </a>
-                </div>
+                <a href="#" class="text-xl font-heading font-bold text-dark flex items-center gap-2">
+                    NEORAX<span class="text-secondary">.</span>
+                </a>
 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#solutions" class="text-gray-600 hover:text-primary transition">Solutions</a>
-                    <a href="#how-it-works" class="text-gray-600 hover:text-primary transition">How It Works</a>
-                    <a href="#testimonials" class="text-gray-600 hover:text-primary transition">Testimonials</a>
-                    <a href="#contact" class="btn-primary text-white px-6 py-2 rounded-lg font-medium">
-                        Get Free Quote
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#solutions" class="text-sm font-medium text-slate-500 hover:text-primary transition">Solutions</a>
+                    <a href="#process" class="text-sm font-medium text-slate-500 hover:text-primary transition">Process</a>
+                    <a href="#team" class="text-sm font-medium text-slate-500 hover:text-primary transition">Team</a>
+                    <a href="#contact" class="btn-hover bg-dark text-white px-5 py-2.5 rounded-full text-sm font-medium flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-green-500"></i>
+                        Let's Talk
                     </a>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-primary p-2">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+                <!-- Mobile Toggle -->
+                <button id="mobile-toggle" class="md:hidden text-slate-400 hover:text-dark">
+                    <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-            <div class="px-4 py-4 space-y-3">
-                <a href="#solutions" class="block text-gray-600 hover:text-primary">Solutions</a>
-                <a href="#how-it-works" class="block text-gray-600 hover:text-primary">How It Works</a>
-                <a href="#testimonials" class="block text-gray-600 hover:text-primary">Testimonials</a>
-                <a href="#contact" class="block btn-primary text-white px-6 py-2 rounded-lg text-center font-medium">
-                    Get Free Quote
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#solutions" class="block text-slate-500 hover:text-primary">Solutions</a>
+                <a href="#process" class="block text-slate-500 hover:text-primary">Process</a>
+                <a href="#team" class="block text-slate-500 hover:text-primary">Team</a>
+                <a href="#contact" class="block bg-dark text-white px-5 py-2.5 rounded-full text-sm font-medium text-center flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-green-500"></i>
+                    Let's Talk
                 </a>
             </div>
         </div>
     </nav>
 
     <!-- 1. HERO SECTION -->
-    <section id="home" class="hero-gradient min-h-screen flex items-center pt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <!-- Hero Content -->
-                <div class="text-white">
-                    <div class="inline-block bg-secondary/20 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                        🔆 Registered Company | CAC: 8228202
+    <section class="min-h-screen flex items-center pt-16 dots">
+        <div class="max-w-6xl mx-auto px-6 py-20">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Content -->
+                <div class="fade-up">
+                    <div class="inline-flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full text-xs font-medium text-slate-500 mb-6">
+                        <span class="w-2 h-2 bg-secondary rounded-full"></span>
+                        CAC Registered • Since 2025
                     </div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-dark leading-tight mb-6">
                         Your One-Stop <br>
-                        <span class="text-secondary">IT Solution Provider</span>
+                        <span class="text-primary">IT Solution</span> Provider
                     </h1>
-                    <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-xl">
-                        Integrated technology solutions including web design, automation, electrical installations, CCTV, solar, and facility management.
+                    <p class="text-lg text-slate-400 mb-8 max-w-md leading-relaxed">
+                        We build digital and technical systems that help organizations automate processes, improve efficiency, and scale operations.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#contact" class="btn-secondary text-center px-8 py-4 rounded-lg font-bold text-lg">
-                            Get Free Consultation
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="btn-hover bg-primary text-white px-8 py-3.5 rounded-full font-medium flex items-center gap-2 shadow-lg shadow-primary/25">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            Get in Touch
                         </a>
-                        <a href="#solutions" class="border-2 border-secondary text-center px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary hover:text-primary transition">
+                        <a href="#solutions" class="btn-hover px-8 py-3.5 rounded-full font-medium text-slate-500 border border-slate-200 hover:border-slate-300">
                             Explore Services
                         </a>
                     </div>
-                    <div class="mt-10 flex items-center gap-8">
-                        <div class="flex -space-x-3">
-                            <img src="https://i.pravatar.cc/100?img=1" alt="Client" class="w-10 h-10 rounded-full border-2 border-primary">
-                            <img src="https://i.pravatar.cc/100?img=2" alt="Client" class="w-10 h-10 rounded-full border-2 border-primary">
-                            <img src="https://i.pravatar.cc/100?img=3" alt="Client" class="w-10 h-10 rounded-full border-2 border-primary">
-                            <div class="w-10 h-10 rounded-full border-2 border-primary bg-secondary flex items-center justify-center text-xs font-bold text-primary">
-                                +50
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex text-yellow-400">★★★★★</div>
-                            <p class="text-sm text-gray-300">Trusted by 50+ Clients</p>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- Hero Visual -->
-                <div class="hidden lg:block">
-                    <div class="relative">
-                        <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-white/10 rounded-2xl p-6 text-center">
-                                    <div class="text-4xl mb-2">💻</div>
-                                    <p class="text-sm text-gray-300">Web Development</p>
-                                </div>
-                                <div class="bg-white/10 rounded-2xl p-6 text-center">
-                                    <div class="text-4xl mb-2">⚡</div>
-                                    <p class="text-sm text-gray-300">Electrical Works</p>
-                                </div>
-                                <div class="bg-white/10 rounded-2xl p-6 text-center">
-                                    <div class="text-4xl mb-2">📹</div>
-                                    <p class="text-sm text-gray-300">CCTV & Security</p>
-                                </div>
-                                <div class="bg-white/10 rounded-2xl p-6 text-center">
-                                    <div class="text-4xl mb-2">☀️</div>
-                                    <p class="text-sm text-gray-300">Solar Installation</p>
-                                </div>
+                <!-- Visual -->
+                <div class="hidden lg:grid grid-cols-2 gap-4 fade-up">
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 rounded-2xl p-6 card-minimal">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm">
+                                <i class="fa-solid fa-laptop-code text-xl text-primary"></i>
                             </div>
+                            <h3 class="font-semibold text-dark mb-1">Web Development</h3>
+                            <p class="text-sm text-slate-400">Custom applications & SaaS</p>
                         </div>
-                        <!-- Floating Elements -->
-                        <div class="absolute -top-4 -right-4 bg-secondary text-primary px-4 py-2 rounded-lg font-bold shadow-lg">
-                            🚀 Since 2025
+                        <div class="bg-slate-50 rounded-2xl p-6 card-minimal">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm">
+                                <i class="fa-solid fa-shield-halved text-xl text-secondary"></i>
+                            </div>
+                            <h3 class="font-semibold text-dark mb-1">Security Systems</h3>
+                            <p class="text-sm text-slate-400">CCTV & smart surveillance</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-8">
+                        <div class="bg-slate-50 rounded-2xl p-6 card-minimal">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm">
+                                <i class="fa-solid fa-solar-panel text-xl text-accent"></i>
+                            </div>
+                            <h3 class="font-semibold text-dark mb-1">Solar Solutions</h3>
+                            <p class="text-sm text-slate-400">Installation & maintenance</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-6 card-minimal">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-4 shadow-sm">
+                                <i class="fa-solid fa-network-wired text-xl text-primary"></i>
+                            </div>
+                            <h3 class="font-semibold text-dark mb-1">Electrical Works</h3>
+                            <p class="text-sm text-slate-400">Network & wiring systems</p>
                         </div>
                     </div>
                 </div>
@@ -165,340 +188,250 @@
         </div>
     </section>
 
-    <!-- 2. PROBLEM SECTION -->
-    <section class="section-gradient py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-                    Outdated Systems Slowing You Down?
-                </h2>
-                <p class="text-lg text-gray-600">
-                    Every day, businesses and homeowners struggle with inefficient processes, unreliable installations, and missing technical support.
-                </p>
+    <!-- 2. CHALLENGE SECTION -->
+    <section class="py-24 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+                <p class="text-sm font-medium text-primary mb-3">The Challenge</p>
+                <h2 class="text-3xl font-heading font-bold text-dark mb-4">Outdated systems slowing you down?</h2>
+                <p class="text-slate-400">Businesses struggle with inefficient processes and unreliable technical solutions. We help you modernize and scale.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl p-8 card-minimal shadow-sm border border-slate-100 fade-up">
+                    <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-globe text-lg text-accent"></i>
+                    </div>
+                    <h3 class="font-semibold text-dark mb-2">No Digital Presence</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Missing online opportunities and falling behind competitors without a professional digital presence.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-8 card-minimal shadow-sm border border-slate-100 fade-up">
+                    <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-plug text-lg text-accent"></i>
+                    </div>
+                    <h3 class="font-semibold text-dark mb-2">Unreliable Installations</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Poor electrical and network systems that don't last. You need safe, dependable solutions.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-8 card-minimal shadow-sm border border-slate-100 fade-up">
+                    <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-gears text-lg text-accent"></i>
+                    </div>
+                    <h3 class="font-semibold text-dark mb-2">Manual Processes</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Inefficient operations costing time and money. Automation can transform your workflow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SOLUTIONS SECTION -->
+    <section id="solutions" class="py-24 dots">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+                <p class="text-sm font-medium text-secondary mb-3">What We Do</p>
+                <h2 class="text-3xl font-heading font-bold text-dark mb-4">Complete Technology Solutions</h2>
+                <p class="text-slate-400">Reliable, long-lasting solutions tailored to your needs using modern tools and best practices.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6">
+                <div class="group bg-dark rounded-3xl p-8 text-white card-minimal fade-up">
+                    <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-code text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-semibold mb-3">Web & Software</h3>
+                    <ul class="space-y-3 mb-6 text-slate-300 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-secondary text-xs"></i> Custom web & mobile apps</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-secondary text-xs"></i> SaaS solutions</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-secondary text-xs"></i> Modern, responsive designs</li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-green-400 transition">
+                        Learn more <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="group bg-white rounded-3xl p-8 card-minimal shadow-sm border border-slate-100 fade-up">
+                    <div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-bolt text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-semibold text-dark mb-3">Electrical & Networks</h3>
+                    <ul class="space-y-3 mb-6 text-slate-500 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent text-xs"></i> Professional CCTV systems</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent text-xs"></i> Solar installation</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent text-xs"></i> Complete wiring solutions</li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-orange-600 transition">
+                        Learn more <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="group bg-white rounded-3xl p-8 card-minimal shadow-sm border border-slate-100 fade-up">
+                    <div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-building text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-semibold text-dark mb-3">Automation & Management</h3>
+                    <ul class="space-y-3 mb-6 text-slate-500 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary text-xs"></i> Facility management systems</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary text-xs"></i> Fleet management solutions</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-primary text-xs"></i> Process automation</li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-blue-600 transition">
+                        Learn more <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PROCESS SECTION -->
+    <section id="process" class="py-24 bg-dark text-white dots">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+                <p class="text-sm font-medium text-secondary mb-3">How It Works</p>
+                <h2 class="text-3xl font-heading font-bold mb-4">Get Started in 3 Steps</h2>
+                <p class="text-slate-400">Simple, transparent process with no hidden surprises.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Problem 1 -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                    <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6">
-                        <span class="text-3xl">💻</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">No Digital Presence</h3>
-                    <p class="text-gray-600">
-                        Your business lacks a professional website or web app. You're missing online opportunities and falling behind competitors.
-                    </p>
+                <div class="text-center fade-up">
+                    <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-5 border border-white/20">1</div>
+                    <h3 class="font-semibold text-lg mb-2">Consultation</h3>
+                    <p class="text-sm text-slate-400 max-w-xs mx-auto">Tell us your needs. We'll assess and recommend the best solution.</p>
                 </div>
-
-                <!-- Problem 2 -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                    <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6">
-                        <span class="text-3xl">🔌</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Unreliable Installations</h3>
-                    <p class="text-gray-600">
-                        Poor electrical wiring, unreliable CCTV, or broken solar systems. You need safe, lasting solutions that actually work.
-                    </p>
+                <div class="text-center fade-up">
+                    <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-5 border border-white/20">2</div>
+                    <h3 class="font-semibold text-lg mb-2">Proposal</h3>
+                    <p class="text-sm text-slate-400 max-w-xs mx-auto">Receive a detailed quote with transparent pricing within 48 hours.</p>
                 </div>
-
-                <!-- Problem 3 -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover">
-                    <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6">
-                        <span class="text-3xl">📈</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Manual Processes</h3>
-                    <p class="text-gray-600">
-                        Your operations are inefficient and time-consuming. You're spending too much on manual tasks that could be automated.
-                    </p>
+                <div class="text-center fade-up">
+                    <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-5 border border-white/20">3</div>
+                    <h3 class="font-semibold text-lg mb-2">Implementation</h3>
+                    <p class="text-sm text-slate-400 max-w-xs mx-auto">Our team delivers and installs with quality support throughout.</p>
                 </div>
             </div>
 
-            <div class="text-center mt-12">
-                <p class="text-lg text-gray-700 font-medium">
-                    What if you could <span class="text-primary font-bold">automate your operations</span> and <span class="text-primary font-bold">get reliable installations</span> — all in one place?
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. SOLUTION SECTION -->
-    <section id="solutions" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-secondary font-semibold uppercase tracking-wide text-sm">Our Solutions</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2 mb-6">
-                    Complete Technology Solutions
-                </h2>
-                <p class="text-lg text-gray-600">
-                    We deliver reliable, long-lasting solutions tailored to client needs using modern tools and industry best practices.
-                </p>
-            </div>
-
-            <div class="grid lg:grid-cols-3 gap-8">
-                <!-- Solution 1 -->
-                <div class="group relative bg-gradient-to-br from-primary to-primaryDark rounded-3xl p-8 text-white card-hover">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/20 rounded-full -mr-8 -mt-8"></div>
-                    <div class="text-5xl mb-6 relative z-10">💻</div>
-                    <h3 class="text-2xl font-bold mb-4">Web & Software Development</h3>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-3">
-                            <span class="text-secondary">✓</span>
-                            Custom web & mobile applications
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-secondary">✓</span>
-                            SaaS solutions for businesses
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-secondary">✓</span>
-                            Modern, responsive designs
-                        </li>
-                    </ul>
-                    <a href="#contact" class="inline-block bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-secondary transition">
-                        Learn More
-                    </a>
-                </div>
-
-                <!-- Solution 2 -->
-                <div class="group relative bg-gradient-to-br from-primary to-primaryDark rounded-3xl p-8 text-white card-hover">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/20 rounded-full -mr-8 -mt-8"></div>
-                    <div class="text-5xl mb-6 relative z-10">⚡</div>
-                    <h3 class="text-2xl font-bold mb-4">Electrical & Network Installations</h3>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-3">
-                            <span class="text-secondary">✓</span>
-                            Professional CCTV systems
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-secondary">✓</span>
-                            Solar installation & maintenance
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-secondary">✓</span>
-                            Complete wiring solutions
-                        </li>
-                    </ul>
-                    <a href="#contact" class="inline-block bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-secondary transition">
-                        Learn More
-                    </a>
-                </div>
-
-                <!-- Solution 3 -->
-                <div class="group relative bg-gradient-to-br from-primary to-primaryDark rounded-3xl p-8 text-white card-hover">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/20 rounded-full -mr-8 -mt-8"></div>
-                    <div class="text-5xl mb-6 relative z-10">🏢</div>
-                    <h3 class="text-2xl font-bold mb-4">Automation & Management</h3>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-3">
-                            <span class="text-secondary">✓</span>
-                            Facility management systems
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-secondary">✓</span>
-                            Fleet management solutions
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="text-secondary">✓</span>
-                            Process automation consulting
-                        </li>
-                    </ul>
-                    <a href="#contact" class="inline-block bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-secondary transition">
-                        Learn More
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. SOCIAL PROOF SECTION -->
-    <section id="testimonials" class="py-20 bg-primary">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="text-secondary font-semibold uppercase tracking-wide text-sm">Why Choose Us</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
-                    Your Trusted Technology Partner
-                </h2>
-            </div>
-
-            <!-- Trust Badges -->
-            <div class="flex flex-wrap justify-center gap-8 mb-16">
-                <div class="bg-white/10 px-6 py-4 rounded-xl text-white font-semibold">🏆 CAC Registered</div>
-                <div class="bg-white/10 px-6 py-4 rounded-xl text-white font-semibold">⭐ Certified Experts</div>
-                <div class="bg-white/10 px-6 py-4 rounded-xl text-white font-semibold">🤝 Borno & Kaduna</div>
-                <div class="bg-white/10 px-6 py-4 rounded-xl text-white font-semibold">📞 24/7 Support</div>
-            </div>
-
-            <!-- Team Section instead of Testimonials -->
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="bg-white rounded-2xl p-6 text-center">
-                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
-                        👨‍💼
-                    </div>
-                    <p class="font-bold text-gray-800">Engr. Hussaini Aliyu</p>
-                    <p class="text-sm text-secondary font-medium">CEO</p>
-                    <p class="text-xs text-gray-500 mt-2">B.Eng Mechatronics</p>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 text-center">
-                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
-                        👨‍💻
-                    </div>
-                    <p class="font-bold text-gray-800">Muhammad A. Sambo</p>
-                    <p class="text-sm text-secondary font-medium">CTO</p>
-                    <p class="text-xs text-gray-500 mt-2">BSc Computer Science</p>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 text-center">
-                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
-                        👨‍🔧
-                    </div>
-                    <p class="font-bold text-gray-800">Bilal Salihu</p>
-                    <p class="text-sm text-secondary font-medium">COO</p>
-                    <p class="text-xs text-gray-500 mt-2">Operations Manager</p>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 text-center">
-                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
-                        📢
-                    </div>
-                    <p class="font-bold text-gray-800">Shuaibu Mohammed</p>
-                    <p class="text-sm text-secondary font-medium">Marketing Manager</p>
-                    <p class="text-xs text-gray-500 mt-2">Client Relations</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. HOW IT WORKS SECTION -->
-    <section id="how-it-works" class="py-20 section-gradient">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-secondary font-semibold uppercase tracking-wide text-sm">Process</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2 mb-6">
-                    Get Started in 3 Simple Steps
-                </h2>
-                <p class="text-lg text-gray-600">
-                    We've made it easy to get started with your project. No stress, no surprises.
-                </p>
-            </div>
-
-            <div class="relative">
-                <!-- Connection Line (Desktop) -->
-                <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-secondary/30 -translate-y-1/2"></div>
-
-                <div class="grid lg:grid-cols-3 gap-8">
-                    <!-- Step 1 -->
-                    <div class="relative text-center">
-                        <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 relative z-10">
-                            1
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">Consultation</h3>
-                        <p class="text-gray-600 max-w-xs mx-auto">
-                            Tell us about your needs. We'll assess your requirements and recommend the best solutions for your project.
-                        </p>
-                        <div class="mt-6 text-secondary text-sm font-medium">
-                            Free consultation
-                        </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="relative text-center">
-                        <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 relative z-10">
-                            2
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">Custom Proposal</h3>
-                        <p class="text-gray-600 max-w-xs mx-auto">
-                            Receive a detailed proposal with transparent pricing. No hidden fees, no pressure—just honest advice.
-                        </p>
-                        <div class="mt-6 text-secondary text-sm font-medium">
-                            Within 24-48 hours
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="relative text-center">
-                        <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 relative z-10">
-                            3
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">Implementation</h3>
-                        <p class="text-gray-600 max-w-xs mx-auto">
-                            Our expert team delivers and installs your solution. We ensure quality and provide ongoing support.
-                        </p>
-                        <div class="mt-6 text-secondary text-sm font-medium">
-                            Timely delivery
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-lg font-bold text-lg inline-block">
+            <div class="text-center mt-12 fade-up">
+                <a href="#contact" class="btn-hover inline-flex items-center gap-2 bg-secondary text-white px-8 py-3.5 rounded-full font-medium">
+                    <i class="fa-brands fa-whatsapp"></i>
                     Start Your Project
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- 6. FINAL CTA SECTION -->
-    <section id="contact" class="hero-gradient py-20">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
-                Ready to Grow Your Business?
-            </h2>
-            <p class="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-                Partner with Neorax Technology for reliable, innovative solutions that drive results.
-            </p>
+    <!-- 5. TEAM SECTION -->
+    <section id="team" class="py-24 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+                <p class="text-sm font-medium text-primary mb-3">Our Team</p>
+                <h2 class="text-3xl font-heading font-bold text-dark mb-4">Meet the Experts</h2>
+                <p class="text-slate-400">A skilled team dedicated to delivering exceptional results.</p>
+            </div>
 
-            <!-- CTA Cards -->
-            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
-                <h3 class="text-2xl font-bold text-primary mb-6">
-                    Get Your Free Consultation & Quote
-                </h3>
-                <form id="contact-form" class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-2xl p-6 text-center card-minimal shadow-sm border border-slate-100 fade-up">
+                    <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-user-tie text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="font-semibold text-dark">Engr. Hussaini Aliyu</h3>
+                    <p class="text-sm text-secondary">CEO</p>
+                    <p class="text-xs text-slate-400 mt-1">B.Eng Mechatronics</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center card-minimal shadow-sm border border-slate-100 fade-up">
+                    <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-code text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="font-semibold text-dark">Muhammad A. Sambo</h3>
+                    <p class="text-sm text-secondary">CTO</p>
+                    <p class="text-xs text-slate-400 mt-1">BSc Computer Science</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center card-minimal shadow-sm border border-slate-100 fade-up">
+                    <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-gears text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="font-semibold text-dark">Bilal Salihu</h3>
+                    <p class="text-sm text-secondary">COO</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center card-minimal shadow-sm border border-slate-100 fade-up">
+                    <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-bullhorn text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="font-semibold text-dark">Shuaibu Mohammed</h3>
+                    <p class="text-sm text-secondary">Marketing Manager</p>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="flex flex-wrap justify-center gap-4 mt-12 fade-up">
+                <span class="px-4 py-2 bg-white rounded-full text-sm text-slate-500 shadow-sm border border-slate-100">
+                    <i class="fa-solid fa-award text-secondary mr-2"></i>CAC Registered
+                </span>
+                <span class="px-4 py-2 bg-white rounded-full text-sm text-slate-500 shadow-sm border border-slate-100">
+                    <i class="fa-solid fa-location-dot text-primary mr-2"></i>Borno & Kaduna
+                </span>
+                <span class="px-4 py-2 bg-white rounded-full text-sm text-slate-500 shadow-sm border border-slate-100">
+                    <i class="fa-solid fa-headset text-accent mr-2"></i>24/7 Support
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CONTACT SECTION -->
+    <section id="contact" class="py-24 bg-dark text-white dots">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="fade-up">
+                <p class="text-sm font-medium text-secondary mb-3">Get Started</p>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Ready to grow your business?</h2>
+                <p class="text-slate-400 mb-10 max-w-lg mx-auto">Let's discuss your project. Fill out the form and we'll reach out on WhatsApp.</p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-8 md:p-10 shadow-2xl max-w-xl mx-auto fade-up">
+                <form id="contact-form" class="space-y-5">
+                    <div class="grid sm:grid-cols-2 gap-5">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2 text-left">Full Name</label>
-                            <input type="text" id="name" name="name" required
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
-                                placeholder="Your Name">
+                            <label class="block text-xs font-medium text-slate-500 mb-2 text-left">Name</label>
+                            <input type="text" id="name" required
+                                class="w-full px-4 py-3 rounded-xl bg-slate-50 border-0 focus:ring-2 focus:ring-primary outline-none transition text-dark text-sm"
+                                placeholder="Your name">
                         </div>
                         <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2 text-left">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
-                                placeholder="+234 8XX XXX XXXX">
+                            <label class="block text-xs font-medium text-slate-500 mb-2 text-left">Phone</label>
+                            <input type="tel" id="phone" required
+                                class="w-full px-4 py-3 rounded-xl bg-slate-50 border-0 focus:ring-2 focus:ring-primary outline-none transition text-dark text-sm"
+                                placeholder="+234 XXX XXX XXXX">
                         </div>
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2 text-left">Email Address</label>
-                        <input type="email" id="email" name="email" required
-                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
+                        <label class="block text-xs font-medium text-slate-500 mb-2 text-left">Email</label>
+                        <input type="email" id="email" required
+                            class="w-full px-4 py-3 rounded-xl bg-slate-50 border-0 focus:ring-2 focus:ring-primary outline-none transition text-dark text-sm"
                             placeholder="you@example.com">
                     </div>
                     <div>
-                        <label for="service" class="block text-sm font-medium text-gray-700 mb-2 text-left">Interested In</label>
-                        <select id="service" name="service"
-                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition">
+                        <label class="block text-xs font-medium text-slate-500 mb-2 text-left">Service</label>
+                        <select id="service"
+                            class="w-full px-4 py-3 rounded-xl bg-slate-50 border-0 focus:ring-2 focus:ring-primary outline-none transition text-dark text-sm">
                             <option value="">Select a service...</option>
-                            <option value="web">Web & Software Development</option>
-                            <option value="electrical">Electrical & Network Installations</option>
-                            <option value="solar">Solar Installation</option>
-                            <option value="cctv">CCTV & Security</option>
-                            <option value="facility">Facility & Fleet Management</option>
-                            <option value="consultancy">Technical Consultancy</option>
-                            <option value="multiple">Multiple Services</option>
+                            <option value="Web & Software Development">Web & Software Development</option>
+                            <option value="Electrical & Network Installations">Electrical & Network Installations</option>
+                            <option value="Solar Installation">Solar Installation</option>
+                            <option value="CCTV & Security">CCTV & Security</option>
+                            <option value="Facility & Fleet Management">Facility & Fleet Management</option>
+                            <option value="Technical Consultancy">Technical Consultancy</option>
+                            <option value="Multiple Services">Multiple Services</option>
                         </select>
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2 text-left">Message (Optional)</label>
-                        <textarea id="message" name="message" rows="3"
-                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
-                            placeholder="Tell us about your project requirements..."></textarea>
+                        <label class="block text-xs font-medium text-slate-500 mb-2 text-left">Message (optional)</label>
+                        <textarea id="message" rows="3"
+                            class="w-full px-4 py-3 rounded-xl bg-slate-50 border-0 focus:ring-2 focus:ring-primary outline-none transition text-dark text-sm"
+                            placeholder="Tell us about your project..."></textarea>
                     </div>
-                    <button type="submit" class="w-full btn-primary text-white py-4 rounded-lg font-bold text-lg hover:bg-primaryDark transition">
-                        Get My Free Quote
+                    <button type="submit" class="w-full bg-secondary text-white py-4 rounded-xl font-semibold hover:bg-green-600 transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        Send via WhatsApp
                     </button>
-                    <p class="text-sm text-gray-500">
-                        🔒 No credit card required • No obligation • 100% Free Consultation
+                    <p class="text-xs text-slate-400 flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-lock"></i>
+                        No obligation • 100% free
                     </p>
                 </form>
             </div>
@@ -506,97 +439,76 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-primaryDark text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer class="bg-white border-t border-slate-100 py-12">
+        <div class="max-w-6xl mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
-                    <h4 class="text-2xl font-bold mb-4">Neorax<span class="text-secondary">.</span></h4>
-                    <p class="text-gray-400">
-                        Your One-Stop IT Solution Provider. Integrated technology solutions for businesses and homes.
-                    </p>
+                    <a href="#" class="text-xl font-heading font-bold text-dark flex items-center gap-2 mb-4">
+                        NEORAX<span class="text-secondary">.</span>
+                    </a>
+                    <p class="text-sm text-slate-400">Your One-Stop IT Solution Provider. Building digital and technical systems that drive results.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Services</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-secondary transition">Web Development</a></li>
-                        <li><a href="#" class="hover:text-secondary transition">Electrical Installations</a></li>
-                        <li><a href="#" class="hover:text-secondary transition">CCTV & Solar</a></li>
-                        <li><a href="#" class="hover:text-secondary transition">Facility Management</a></li>
+                    <h4 class="font-semibold text-dark mb-4 text-sm">Services</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-primary transition">Web Development</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Electrical Works</a></li>
+                        <li><a href="#" class="hover:text-primary transition">CCTV & Solar</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Facility Management</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Company</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-secondary transition">About Us</a></li>
-                        <li><a href="#" class="hover:text-secondary transition">Our Team</a></li>
-                        <li><a href="#" class="hover:text-secondary transition">Contact</a></li>
+                    <h4 class="font-semibold text-dark mb-4 text-sm">Company</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-primary transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Our Team</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Contact</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Contact</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li>📞 +234 802 689 7437</li>
-                        <li>📞 +234 816 487 2514</li>
-                        <li>📧 info@neoraxtech.com</li>
-                        <li>📍 No. 14, 2nd Floor, NACR Building, Kashim Ibrahim Way, Maiduguri</li>
+                    <h4 class="font-semibold text-dark mb-4 text-sm">Contact</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-secondary"></i> +234 802 689 7437</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-secondary"></i> +234 816 487 2514</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-accent"></i> info@neoraxtech.com</li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 Neorax Technology Limited. CAC Registration: 8228202. All rights reserved.</p>
+            <div class="border-t border-slate-100 pt-8 text-center text-sm text-slate-400">
+                <p>&copy; 2025 Neorax Technology Limited. CAC: 8228202. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu on link click
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // WhatsApp Click-to-Chat Configuration
+        // WhatsApp Configuration
         const WHATSAPP_NUMBER = '2349125241369';
 
-        // Form Submission Handler with WhatsApp Redirect
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Form Submission - WhatsApp Redirect
         const contactForm = document.getElementById('contact-form');
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
 
-            // Get form data
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
-            const service = document.getElementById('service').value;
-            const message = document.getElementById('message').value;
+                const name = document.getElementById('name').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const serviceSelect = document.getElementById('service');
+                const service = serviceSelect.options[serviceSelect.selectedIndex].text;
+                const message = document.getElementById('message').value.trim();
 
-            // Build WhatsApp message
-            const whatsappMessage = `Hello Neorax Technology,
+                const whatsappMessage = `Hello Neorax Technology,
 
 I'm interested in your services.
 
@@ -604,60 +516,26 @@ Name: ${name}
 Phone: ${phone}
 Email: ${email}
 Service: ${service}
-Message: ${message}`;
+Message: ${message || 'No message'}`;
 
-            // Create WhatsApp URL
-            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+                const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+                window.open(whatsappURL, '_blank');
 
-            // Open WhatsApp in new tab/window
-            window.open(whatsappURL, '_blank');
+                contactForm.reset();
+            });
+        }
 
-            // Reset form
-            contactForm.reset();
-        });
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-md');
-            } else {
-                nav.classList.remove('shadow-md');
-            }
-        });
-
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Scroll Animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in');
-                    observer.unobserve(entry.target);
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        // Observe cards and sections for animation
-        document.querySelectorAll('.card-hover, .bg-white.rounded-2xl, .bg-white.rounded-3xl').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Add animation class styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .animate-fade-in {
-                opacity: 1 !important;
-                transform: translateY(0) !important;
-            }
-        `;
-        document.head.appendChild(style);
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
