@@ -76,6 +76,33 @@
         .btn-hover:active {
             transform: translateY(0);
         }
+
+        /* Cycling Text Animation */
+        .cycling-wrapper {
+            display: inline-block;
+            height: 1.3em;
+            overflow: hidden;
+            vertical-align: bottom;
+        }
+
+        .cycling-text {
+            display: block;
+            animation: cycleWords 6s infinite;
+        }
+
+        .cycling-text span {
+            display: block;
+            height: 1.3em;
+            line-height: 1.3em;
+        }
+
+        @keyframes cycleWords {
+            0%, 22% { transform: translateY(0); opacity: 1; }
+            25%, 47% { transform: translateY(-1.3em); opacity: 1; }
+            50%, 72% { transform: translateY(-2.6em); opacity: 1; }
+            75%, 97% { transform: translateY(-3.9em); opacity: 1; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body class="font-sans text-slate-600 antialiased bg-white">
@@ -133,7 +160,14 @@
                     </div>
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-dark leading-tight mb-6">
                         Your One-Stop <br>
-                        <span class="text-primary">IT Solution</span> Provider
+                        <span class="text-primary cycling-wrapper">
+                            <span class="cycling-text">
+                                <span>IT Solution</span>
+                                <span>Smart Energy</span>
+                                <span>Solar Energy</span>
+                                <span>SAAS</span>
+                            </span>
+                        </span> Provider
                     </h1>
                     <p class="text-lg text-slate-400 mb-8 max-w-md leading-relaxed">
                         We build digital and technical systems that help organizations automate processes, improve efficiency, and scale operations.
